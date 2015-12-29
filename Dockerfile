@@ -15,5 +15,6 @@ ADD Dockerfile.final /go/bin/Dockerfile
 ADD config-sample.json /go/bin/config.json
 RUN apt-get update && apt-get install -y wget && wget https://get.docker.com/builds/Linux/x86_64/docker-latest -O /usr/bin/docker
 RUN chmod u+x /usr/bin/docker
+RUN service docker start
 # Command to run
 CMD docker build -t cfplatformeng/rds-broker /go/bin

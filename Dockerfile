@@ -1,11 +1,19 @@
-FROM scratch 
-MAINTAINER Ferran Rodenas <frodenas@gmail.com> 
+FROM golang
+MAINTAINER Ferran Rodenas <frodenas@gmail.com>
 
-# Add files 
-ADD rds-broker /rds-broker 
-ADD config-sample.json /config.json 
-# Command to run 
-ENTRYPOINT ["/rds-broker"] 
-CMD ["--config=/config.json"] 
-# Expose listen ports 
- EXPOSE 3000 
+# Set environment variables
+ENV CGO_ENABLED 0
+ENV GOARCH      amd64
+ENV GOARM       5
+ENV GOOS        linux
+
+# Build BOSH Registry
+RUN go get -a -installsuffix cgo -ldflags '-s' github.com/cf-platform-eng/rds-broker
+
+# Add files
+ADD Dockerfile.final /go/bin/Dockerfile
+ADD config.json /go/bin/config.json
+RUN 
+
+# Command to run
+CMD docker build -t cfplatformeng/rds-broker /go/bin

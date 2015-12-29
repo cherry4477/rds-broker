@@ -14,5 +14,7 @@ RUN go get -a -installsuffix cgo -ldflags '-s' github.com/cf-platform-eng/rds-br
 ADD Dockerfile.final /go/bin/Dockerfile
 ADD config-sample.json /go/bin/config.json
 
+RUN apt-install -y docker.io
+
 # Command to run
 CMD docker build -t cfplatformeng/rds-broker /go/bin

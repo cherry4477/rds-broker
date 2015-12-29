@@ -12,7 +12,7 @@ RUN go get -a -installsuffix cgo -ldflags '-s' github.com/cf-platform-eng/rds-br
 
 # Add files
 ADD Dockerfile.final /go/bin/Dockerfile
-ADD config.json /go/bin/config.json
+ADD config-sample.json /go/bin/config.json
 RUN apt-get update && apt-get install -y wget && wget https://get.docker.com/builds/Linux/x86_64/docker-latest -O /usr/bin/docker && apt-get clean
 RUN chmod u+x /usr/bin/docker
 # Command to run
